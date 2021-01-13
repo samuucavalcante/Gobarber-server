@@ -1,5 +1,5 @@
 import { hash } from 'bcryptjs';
-import User from '@modules/users/infra/typeorm/entities/User';
+import IUser from '@modules/users/entities/IUser';
 
 import IUserRepository from '@modules/users/repositories/IUsersRepository';
 import { injectable, inject } from 'tsyringe';
@@ -19,11 +19,11 @@ class CreateUsersService {
     private userRepository: IUserRepository,
   ) {}
 
-  public async execute({ name, email, password }: IRequest): Promise<User> {
+  public async execute({ name, email, password }: IRequest): Promise<IUser> {
     const checkUsersExists = await this.userRepository.findByEmail(email);
 
     if (checkUsersExists) {
-      throw new AppError('Email adress already used.');
+      throw new AppError('Email address already used.');
     }
     const hashedPassword = await hash(password, 8);
 

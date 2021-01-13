@@ -1,6 +1,6 @@
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
-import User from '@modules/users/infra/typeorm/entities/User';
+import IUser from '@modules/users/entities/IUser';
 import { injectable, inject } from 'tsyringe';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 
@@ -14,7 +14,7 @@ interface IRequest {
 }
 
 interface IResponse {
-  user: User;
+  user: IUser;
   token: string;
 }
 
