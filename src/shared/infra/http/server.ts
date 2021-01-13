@@ -4,6 +4,7 @@ import cors from 'cors';
 import uploadConfig from '@config/upload';
 import routers from './routes';
 import '../typeorm';
+import '@shared/container';
 
 const app = express();
 

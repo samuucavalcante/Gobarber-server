@@ -24,11 +24,9 @@ class User {
   avatar: string;
 
   @CreateDateColumn()
-  // eslint-disable-next-line camelcase
   created_at: Date;
 
   @UpdateDateColumn()
-  // eslint-disable-next-line camelcase
   update_at: Date;
 }
 
