@@ -1,0 +1,11 @@
+version: "1.0"
+
+services:
+  gobarber_db:
+    image: postgres
+    container_name: gobarber
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+    ports:
+      - 5432:5432
