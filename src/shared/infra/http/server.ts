@@ -1,9 +1,9 @@
 import 'reflect-metadata';
 import express from 'express';
 import cors from 'cors';
+import uploadConfig from '@config/upload';
 import routers from './routes';
-import './database';
-import uploadConfig from './config/upload';
+import '../typeorm';
 
 const app = express();
 

@@ -1,4 +1,8 @@
-import { MigrationInterface, QueryRunner, TableColumn } from 'typeorm';
+import {
+  MigrationInterface,
+  QueryRunner,
+  TableColumn,
+} from '@shared/infra/typeorm';
 
 export default class CreateCollumAvatar1606411719366
   implements MigrationInterface {

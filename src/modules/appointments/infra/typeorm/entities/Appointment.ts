@@ -8,7 +8,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 
-import User from './User';
+import User from '@modules/users/infra/typeorm/entities/User';
 
 @Entity('appointments')
 class Appointment {
@@ -16,7 +16,6 @@ class Appointment {
   id: string;
 
   @Column()
-  // eslint-disable-next-line camelcase
   provider_id: string;
 
   @ManyToOne(() => User)
@@ -27,11 +26,9 @@ class Appointment {
   date: Date;
 
   @CreateDateColumn()
-  // eslint-disable-next-line camelcase
   created_at: Date;
 
   @UpdateDateColumn()
-  // eslint-disable-next-line camelcase
   update_at: Date;
 }
 
