@@ -1,4 +1,4 @@
-import IUser from '@modules/users/entities/IUser';
+import IUser from '@modules/users/models/IUser';
 
 export default interface IAppointment {
   id: string;
