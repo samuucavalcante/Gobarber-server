@@ -3,7 +3,7 @@ import {
   QueryRunner,
   TableColumn,
   TableForeignKey,
-} from '@shared/infra/typeorm';
+} from 'typeorm';
 
 export default class AlterProviderFildToProvider1610484707847
   implements MigrationInterface {
@@ -29,8 +29,6 @@ export default class AlterProviderFildToProvider1610484707847
         onUpdate: 'CASCADE',
       }),
     );
-
-    // Cascade
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {

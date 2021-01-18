@@ -3,6 +3,8 @@ import AuthenticateUserService from '@modules/users/services/AuthenticateUserSer
 
 import UsersRepository from '@modules/users/infra/typeorm/repositories/UserRepository';
 
+import BCrypyHashProvider from '@modules/users/providers/HashProvider/implementations/BCrypyHashProvider';
+
 interface IUser {
   name: string;
   password?: string;
@@ -15,7 +17,11 @@ export default class SessionsController {
       const { email, password } = request.body;
 
       const usersRepository = new UsersRepository();
-      const authenticateUser = new AuthenticateUserService(usersRepository);
+      const bCrypyHashPrivider = new BCrypyHashProvider();
+      const authenticateUser = new AuthenticateUserService(
+        usersRepository,
+        bCrypyHashPrivider,
+      );
 
       const { user, token } = await authenticateUser.execute({
         email,

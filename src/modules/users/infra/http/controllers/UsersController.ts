@@ -19,6 +19,8 @@ export default class UsersController {
         email,
         password,
       });
+      console.log(user);
+
       delete user.password;
       return response.json(user);
     } catch (err) {

@@ -1,8 +1,5 @@
-import path from 'path';
-import fs from 'fs';
 import IUser from '@modules/users/models/IUser';
 
-import uploadConfig from '@config/upload';
 import { injectable, inject } from 'tsyringe';
 
 import IUserRepository from '@modules/users/repositories/IUsersRepository';
