@@ -11,7 +11,6 @@ const usersRouter = Router();
 const usersController = new UsersController();
 const updateAvatarController = new UpdateAvatarController();
 const upload = multer(uploadConfig);
-
 usersRouter.post('/', usersController.create);
 
 usersRouter.patch(

@@ -43,7 +43,7 @@ describe('ResetPasswordService', () => {
   });
 
   it('should not be able to reset password with non-existing token', async () => {
-    expect(
+    await expect(
       resetPasswordService.execute({
         password: '12345',
         token: 'non-existing-token',
@@ -56,9 +56,32 @@ describe('ResetPasswordService', () => {
       'non-existing-user',
     );
 
-    expect(
+    await expect(
       resetPasswordService.execute({
         password: '12345',
+        token,
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+
+  it('should not be able to reset password if passed more than 2 hours', async () => {
+    const user = await fakeUsersRepository.create({
+      email: 'joedoe@example.com',
+      name: 'Joe Doe',
+      password: '12345',
+    });
+
+    const { token } = await fakeUsersTokenRepository.generate(user.id);
+
+    jest.spyOn(Date, 'now').mockImplementation(() => {
+      const customDate = new Date();
+
+      return customDate.setHours(customDate.getHours() + 3);
+    });
+
+    await expect(
+      resetPasswordService.execute({
+        password: '123123',
         token,
       }),
     ).rejects.toBeInstanceOf(AppError);

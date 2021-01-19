@@ -1,5 +1,7 @@
 import { injectable, inject } from 'tsyringe';
 
+import { isAfter, addHours } from 'date-fns';
+
 import IUserRepository from '@modules/users/repositories/IUsersRepository';
 import IUsersTokensRepository from '@modules/users/repositories/IUserTokensRepository';
 
@@ -12,7 +14,7 @@ interface IRequest {
 }
 
 @injectable()
-class CreateUsersService {
+class ResetPasswordService {
   constructor(
     @inject('UsersRepository')
     private userRepository: IUserRepository,
@@ -36,10 +38,17 @@ class CreateUsersService {
       throw new AppError('User does not exists.');
     }
 
+    const tokenCreatedAt = userToken.created_at;
+    const compareDate = addHours(tokenCreatedAt, 2);
+
+    if (isAfter(Date.now(), compareDate)) {
+      throw new AppError('token expired.');
+    }
+
     user.password = await this.hashProvider.generateHash(password);
 
     await this.userRepository.save(user);
   }
 }
 
-export default CreateUsersService;
+export default ResetPasswordService;

@@ -12,7 +12,7 @@ interface IRequest {
 }
 
 @injectable()
-class CreateUsersService {
+class SendForgotEmailPassowrdService {
   constructor(
     @inject('UsersRepository')
     private userRepository: IUserRepository,
@@ -30,11 +30,14 @@ class CreateUsersService {
     if (!user) {
       throw new AppError('User does not exists.');
     }
-
     await this.usersTokenRepository.generate(user.id);
+    console.log('123');
 
-    this.mailProvider.sendMail(email, 'Pedido de recupera de senha recebido');
+    await this.mailProvider.sendMail(
+      email,
+      'Pedido de recupera de senha recebido',
+    );
   }
 }
 
-export default CreateUsersService;
+export default SendForgotEmailPassowrdService;
